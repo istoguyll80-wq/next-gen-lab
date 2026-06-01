@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Phishing Awareness Simulator</title>
+  <meta name="description" content="Interactive phishing awareness simulator — learn to identify phishing attacks, fake links, suspicious messages, and online scams." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container" role="main">
+
+    <!-- ── Sticky Navbar ──────────────────────────────────── -->
+    <header>
+      <a class="brand" href="index.html" aria-label="Phishing Awareness Simulator Home">
+        <div class="logo" aria-hidden="true">⛨</div>
+        <div>
+          <div class="brand-name">Phishguard</div>
+          <div class="brand-sub">Awareness Simulator</div>
+        </div>
+      </a>
+      <nav aria-label="Main navigation">
+        <a href="#features" class="active">Features</a>
+        <a href="#how">How it works</a>
+        <a href="contact.html">Contact</a>
+        <span id="nav-welcome" class="muted" style="margin-left:8px;display:none"></span>
+        <a id="nav-login" href="login.html" class="btn secondary" style="margin-left:8px;padding:7px 16px">Log in</a>
+        <a id="nav-logout" href="#" style="display:none" class="btn secondary" style="padding:7px 16px">Log out</a>
+      </nav>
+    </header>
+
+    <!-- ── Hero ──────────────────────────────────────────── -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-inner">
+
+        <div class="threat-badge" role="status">
+          ⚠ Live Threat Simulation Active
+          +
+        </div>
+
+        <h1 id="hero-title">
+          Detect.<br>
+          <span class="hero-accent">Defend.</span><br>
+          Stay Secure.
+        </h1>
+
+        <p class="lead">
+          Train against realistic phishing emails, fake login pages, and social engineering attacks.
+          Build real instincts — before real attackers strike.
+        </p>
+
+        <div class="cta" role="group" aria-label="Primary actions">
+          <button class="btn primary" type="button" onclick="location.href='choose_quiz.html'">
+            ▶ Start Simulation
+          </button>
+          <button class="btn secondary" id="open-modal" type="button">
+            Learn More
+          </button>
+          <a class="btn secondary" id="cta-account" href="register.html">
+            Create Account
+          </a>
+        </div>
+
+        <div class="muted" style="display:flex;align-items:center;gap:8px;font-size:12px">
+          <span style="color:var(--accent3)">●</span>
+          No real emails are sent — all simulations are safe and contained.
+        </div>
+
+        <!-- Feature cards -->
+        <div class="cards" id="features" aria-label="Key features">
+          <div class="card">
+            <div class="card-icon">📧</div>
+            <strong>Simulated Emails</strong>
+            <div class="muted">Realistic phishing templates that mirror real-world attacks — without any actual risk.</div>
+          </div>
+          <div class="card">
+            <div class="card-icon purple">🎯</div>
+            <strong>Bite-sized Training</strong>
+            <div class="muted">Instant interactive lessons delivered after each simulated threat to reinforce learning.</div>
+          </div>
+          <div class="card">
+            <div class="card-icon green">📊</div>
+            <strong>Real-time Analytics</strong>
+            <div class="muted">Score tracking, progress reports, and actionable feedback to measure improvement.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Sidebar Panel ──────────────────────────────── -->
+      <aside class="demo-panel" aria-label="Quick demo and stats">
+
+        <div style="font-family:'Orbitron',monospace;font-size:13px;color:var(--accent);font-weight:700;margin-bottom:4px">
+          SECURITY DASHBOARD
+        </div>
+        <div class="muted" style="margin-bottom:18px">Live training metrics</div>
+
+        <div class="stats-row">
+          <div class="stat-box">
+            <div class="stat-num">94%</div>
+            <div class="stat-label">Detection Rate</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num">3</div>
+            <div class="stat-label">Modules</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num">25+</div>
+            <div class="stat-label">Scenarios</div>
+          </div>
+        </div>
+
+        <!-- Simulated threat preview card -->
+        <div class="threat-card" role="img" aria-label="Example phishing email threat card">
+          <div class="threat-icon">🚨</div>
+          <div>
+            <div style="font-size:12px;font-weight:700;color:#f87171;text-transform:uppercase;letter-spacing:0.08em">High Risk — Phishing Detected</div>
+            <div style="font-size:13px;color:var(--text-dim);margin-top:4px">Suspicious sender: <span style="color:#fbbf24">security@paypa1-verify.ru</span></div>
+            <div style="margin-top:8px"><span class="badge danger">⚠ FAKE DOMAIN</span></div>
+          </div>
+        </div>
+
+        <div class="safe-card" role="img" aria-label="Example safe email card">
+          <div class="threat-icon">✅</div>
+          <div>
+            <div style="font-size:12px;font-weight:700;color:#34d399;text-transform:uppercase;letter-spacing:0.08em">Safe — Verified Sender</div>
+            <div style="font-size:13px;color:var(--text-dim);margin-top:4px">Domain: <span style="color:#34d399">no-reply@google.com</span></div>
+            <div style="margin-top:8px"><span class="badge safe">✓ LEGITIMATE</span></div>
+          </div>
+        </div>
+
+        <div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn primary" id="open-demo" style="flex:1">View Demo</button>
+          <a class="btn secondary" href="choose_quiz.html" style="flex:1;text-align:center">Test Skills</a>
+        </div>
+      </aside>
+    </section>
+
+    <!-- ── How it Works ───────────────────────────────────── -->
+    <section class="how-section" id="how" aria-labelledby="how-title">
+      <div class="section-label">// How it works</div>
+      <h2 class="section-title" id="how-title">Three Steps to Cyber Awareness</h2>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">01</div>
+          <div class="step-icon">🎮</div>
+          <h3>Choose a Scenario</h3>
+          <div class="muted">Pick from Email, Discord, or Steam phishing simulations — each based on real attack patterns.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <div class="step-icon">🔍</div>
+          <h3>Analyse the Threat</h3>
+          <div class="muted">Examine suspicious senders, fake links, urgent language, and other red flags in each message.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <div class="step-icon">🏆</div>
+          <h3>Learn & Improve</h3>
+          <div class="muted">Get instant feedback, explanations, and a score — then replay to sharpen your instincts.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Footer ─────────────────────────────────────────── -->
+    <footer>
+      <div>© <span id="year"></span> Phishing Awareness Simulator — For educational use only.</div>
+      <div class="muted">
+        <a href="contact.html">Contact</a> &nbsp;|&nbsp;
+        Privacy &nbsp;|&nbsp; Terms &nbsp;|&nbsp;
+        <span style="color:var(--accent3)">⛨ Safe Training Environment</span>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ── Modal ──────────────────────────────────────────────── -->
+  <div class="modal-backdrop" id="modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modal-title">
+    <div class="modal" role="document">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:16px">
+        <div>
+          <h3 id="modal-title">About the Simulator</h3>
+          <div class="muted">Designed to build real cybersecurity instincts through safe, controlled training.</div>
+        </div>
+        <button class="close" id="close-modal" aria-label="Close modal">✕ Close</button>
+      </div>
+
+      <div style="display:grid;gap:12px">
+        <div class="card" style="display:flex;gap:12px;align-items:flex-start">
+          <span style="font-size:24px">📧</span>
+          <div>
+            <strong>Email Phishing Simulator</strong>
+            <div class="muted">Realistic email simulations covering sender spoofing, malicious links, and attachment scams.</div>
+          </div>
+        </div>
+        <div class="card" style="display:flex;gap:12px;align-items:flex-start">
+          <span style="font-size:24px">💬</span>
+          <div>
+            <strong>Social Platform Simulations</strong>
+            <div class="muted">Discord and Steam-style chat scams — fake giveaways, trade offers, and account theft attempts.</div>
+          </div>
+        </div>
+        <div class="card" style="display:flex;gap:12px;align-items:flex-start">
+          <span style="font-size:24px">🤖</span>
+          <div>
+            <strong>AI Helper Chat</strong>
+            <div class="muted">Ask our AI assistant anything about phishing, suspicious messages, or safe online behaviour.</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:18px;display:flex;gap:10px">
+        <button class="btn primary" onclick="location.href='choose_quiz.html'">Start Training Now</button>
+        <button class="close" id="close-modal-2" style="border-color:rgba(0,212,255,0.2);color:var(--accent)">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="auth.js"></script>
+  <script src="chat_widget.js"></script>
+  <script>
+    (function () {
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      // Modal logic
+      var modal = document.getElementById('modal');
+      function showModal() { modal.style.display = 'flex'; modal.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden'; }
+      function hideModal() { modal.style.display = 'none'; modal.setAttribute('aria-hidden', 'true'); document.body.style.overflow = ''; }
+
+      document.getElementById('open-modal').addEventListener('click', showModal);
+      document.getElementById('open-demo').addEventListener('click', showModal);
+      document.getElementById('close-modal').addEventListener('click', hideModal);
+      document.getElementById('close-modal-2').addEventListener('click', hideModal);
+      modal.addEventListener('click', function (e) { if (e.target === modal) hideModal(); });
+
+      if (window.applyAuthUi) window.applyAuthUi();
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Register — Phishing Awareness Simulator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <a class="brand" href="index.html" aria-label="Back to home">
+        <div class="logo" aria-hidden="true">⛨</div>
+        <div>
+          <div class="brand-name">PhishGuard</div>
+          <div class="brand-sub">Awareness Simulator</div>
+        </div>
+      </a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="choose_quiz.html">Simulator</a>
+        <a href="login.html" class="btn secondary" style="padding:7px 16px">Log in</a>
+      </nav>
+    </header>
+  </div>
+
+  <div class="auth-wrap">
+    <section class="auth-card" aria-labelledby="register-title">
+      <div style="text-align:center;margin-bottom:24px">
+        <div style="font-size:40px;margin-bottom:10px">🛡️</div>
+        <h1 id="register-title">Create Account</h1>
+        <p>Join the training platform and start building cyber awareness skills.</p>
+      </div>
+
+      <!-- Benefit badges -->
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px;justify-content:center">
+        <span class="badge safe">✓ Free Access</span>
+        <span class="badge info">📊 Score Tracking</span>
+        <span class="badge info">🎯 25+ Scenarios</span>
+      </div>
+
+      <form id="registerForm" class="auth-form" novalidate>
+        <div>
+          <label for="name">Full Name</label>
+          <input id="name" name="name" type="text" required autocomplete="name" placeholder="Your name" />
+        </div>
+        <div>
+          <label for="email">Email Address</label>
+          <input id="email" name="email" type="email" required autocomplete="email" placeholder="you@example.com" />
+        </div>
+        <div>
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" minlength="6" required autocomplete="new-password" placeholder="Min. 6 characters" />
+        </div>
+        <button class="btn primary" type="submit" style="width:100%;justify-content:center;padding:14px">
+          🚀 Create Free Account
+        </button>
+      </form>
+
+      <div id="message" class="auth-msg" aria-live="polite"></div>
+
+      <div class="auth-row" style="margin-top:20px;padding-top:16px;border-top:1px solid rgba(0,212,255,0.08)">
+        <a class="link" href="login.html">Already have an account? Log in</a>
+        <a class="link" href="index.html">← Back to home</a>
+      </div>
+    </section>
+  </div>
+
+  <script src="auth.js"></script>
+  <script src="chat_widget.js"></script>
+  <script>setupRegisterForm();</script>
+</body>
+</html>

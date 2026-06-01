@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Email Phishing Simulator — PhishGuard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="quiz.css">
+</head>
+<body>
+  <div class="app" role="application" aria-label="Email phishing quiz">
+
+    <!-- ── Header ──────────────────────────────────────────── -->
+    <header>
+      <div style="font-size:24px" aria-hidden="true">📧</div>
+      <div>
+        <h1>Email Phishing Simulator</h1>
+        <div class="meta">Identify each email as legitimate or a phishing attempt</div>
+      </div>
+      <div id="scoreMeta" style="margin-left:auto">Score: 0 / 0</div>
+    </header>
+
+    <main>
+      <!-- Nav row -->
+      <nav aria-label="Quiz navigation" style="display:flex;align-items:center;gap:10px;margin-bottom:18px;flex-wrap:wrap">
+        <a href="index.html" class="btn" role="link" style="text-decoration:none">← Home</a>
+        <a href="choose_quiz.html" class="btn primary" role="link" style="margin-left:auto;text-decoration:none">Switch Module</a>
+      </nav>
+
+      <!-- ── Email card ─────────────────────────────────────── -->
+      <section class="card" aria-live="polite">
+
+        <!-- Risk indicator (dynamic) -->
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px">
+          <div class="meta" style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent)">// Incoming Message Analysis</div>
+          <span id="riskBadge" class="risk-badge medium">⚡ Analysing...</span>
+        </div>
+
+        <div class="email-top">
+          <div class="from">
+            <div class="avatar" id="avatar">GM</div>
+            <div class="from-details">
+              <strong id="fromName">Google Mail</strong>
+              <span id="fromEmail" class="meta">no-reply@google.com</span>
+              <div id="date" class="meta">Today, 09:41</div>
+            </div>
+          </div>
+          <div class="toolbar">
+            <button class="btn" id="toggleHeaders">📋 Headers</button>
+            <button class="btn" id="revealAnswer">👁 Reveal</button>
+          </div>
+        </div>
+
+        <div class="subject" id="subject">Subject Placeholder</div>
+
+        <div class="email-body" id="emailBody">Email content will appear here.</div>
+
+        <div id="rawHeaders" class="header-raw hidden" aria-hidden="true"></div>
+
+        <div class="controls">
+          <button class="btn leg" id="btnLeg">✓ Legitimate</button>
+          <button class="btn phish" id="btnPhish">⚠ Phishing</button>
+
+          <div class="progress" aria-hidden="false">
+            <i id="progressBar" style="width:0%"></i>
+          </div>
+
+          <div id="qIndex">1 / 1</div>
+        </div>
+
+        <div id="feedback" class="result hidden" role="status"></div>
+        <div id="indicators" class="indicators hidden"></div>
+      </section>
+
+      <!-- Controls card -->
+      <section class="card" id="controlsCard">
+        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+          <button class="btn" id="prevBtn" disabled>← Previous</button>
+          <button class="btn primary" id="nextBtn">Next →</button>
+          <div style="margin-left:auto" class="meta" id="hintText">💡 Tip: check the sender address and hover over links.</div>
+        </div>
+      </section>
+
+      <!-- Summary card -->
+      <section class="card hidden" id="summaryCard" aria-live="polite">
+        <div style="text-align:center;padding:12px 0">
+          <div style="font-size:48px;margin-bottom:12px" id="summaryEmoji">🏆</div>
+          <h3>Training Complete</h3>
+          <div id="summaryText" class="meta" style="margin-top:8px;font-size:14px;line-height:1.7"></div>
+          <div style="margin-top:20px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+            <button class="btn primary" id="restartBtn">↺ Restart Quiz</button>
+            <a class="btn" href="choose_quiz.html" style="text-decoration:none">Try Another Module</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="email_quiz.js"></script>
+    <script src="chat_widget.js"></script>
+  </div>
+</body>
+</html>

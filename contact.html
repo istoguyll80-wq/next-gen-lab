@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Contact — Phishing Awareness Simulator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="contact.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <a class="brand" href="index.html" aria-label="Phishing Awareness Simulator">
+        <div class="logo">⛨</div>
+        <div>
+          <div class="brand-name">PhishGuard</div>
+          <div class="brand-sub">Awareness Simulator</div>
+        </div>
+      </a>
+      <nav aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="choose_quiz.html">Simulator</a>
+      </nav>
+    </header>
+
+    <main class="hero" role="main" aria-labelledby="contact-heading">
+
+      <section class="hero-inner">
+        <div style="font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);font-weight:700">// Get in touch</div>
+        <h1 id="contact-heading">Contact Us</h1>
+        <p class="lead">Have questions about the simulator, or need help? Send us a message or use the direct contacts on the right.</p>
+
+        <div class="card" style="padding:24px">
+          <div style="margin-bottom:18px">
+            <div style="font-size:12px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px">Send a Message</div>
+          </div>
+          <form id="contactForm" action="/contact" method="post" aria-label="Contact form">
+            <label>
+              <span>Your name</span>
+              <input name="name" type="text" placeholder="Enter your full name" required />
+            </label>
+            <label>
+              <span>Email address</span>
+              <input name="email" type="email" placeholder="you@example.com" required />
+            </label>
+            <label>
+              <span>Message</span>
+              <textarea name="message" placeholder="How can we help you?" required></textarea>
+            </label>
+            <button type="submit">📨 Send Message</button>
+          </form>
+          <div id="contactMessage" class="muted" style="margin-top:12px"></div>
+        </div>
+      </section>
+
+      <aside aria-label="Direct contact information">
+        <div style="font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:16px">// Direct Contacts</div>
+        <div class="contact-list">
+          <div class="item" role="article" aria-labelledby="email-label">
+            <div class="icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00d4ff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 8.5v7A2.5 2.5 0 0 0 5.5 18h13A2.5 2.5 0 0 0 21 15.5v-7"/>
+                <path d="M21 8.5l-9 6-9-6"/>
+                <path d="M3 6.5A2.5 2.5 0 0 1 5.5 4h13A2.5 2.5 0 0 1 21 6.5"/>
+              </svg>
+            </div>
+            <div>
+              <div id="email-label"><a href="mailto:ad170@bgt.school">ad170@bgt.school</a></div>
+              <small>Primary email — click to compose</small>
+            </div>
+          </div>
+
+          <div class="item" role="article" aria-labelledby="phone-label">
+            <div class="icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 3.08 7.81 19.79 19.79 0 0 1 .01-.62 2 2 0 0 1 2 0h3a2 2 0 0 1 2 1.72c.12 1.05.37 2.07.74 3.03a2 2 0 0 1-.45 2.11L6.4 8.6a16 16 0 0 0 7 7l1.74-1.03a2 2 0 0 1 2.11-.45c.96.37 1.98.62 3.03.74A2 2 0 0 1 22 16.92z"/>
+              </svg>
+            </div>
+            <div>
+              <div id="phone-label"><a href="tel:+044131512">044 131 512</a></div>
+              <small>Phone — tap to call</small>
+            </div>
+          </div>
+
+          <div class="item" role="article" aria-labelledby="hours-label">
+            <div class="icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="9"/>
+                <path d="M12 7v5l3 2"/>
+              </svg>
+            </div>
+            <div>
+              <div id="hours-label">Office Hours</div>
+              <small>Mon–Fri, 09:00–17:00</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Info box -->
+        <div style="margin-top:20px;background:rgba(0,212,255,0.04);border:1px solid rgba(0,212,255,0.12);border-radius:12px;padding:16px">
+          <div style="font-size:12px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px">🛡️ British Gymnasium of Technology</div>
+          <div class="muted">This simulator is developed as part of a cybersecurity education initiative. All training content is safe and educational.</div>
+        </div>
+      </aside>
+
+    </main>
+
+    <footer>
+      <div class="muted">© British Gymnasium of Technology</div>
+      <div class="muted">Need help? <a href="mailto:ad170@bgt.school">ad170@bgt.school</a></div>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      var form = document.getElementById("contactForm");
+      var msg = document.getElementById("contactMessage");
+      if (!form) return;
+
+      form.addEventListener("submit", async function (event) {
+        event.preventDefault();
+        var name = String(form.name.value || "").trim();
+        var email = String(form.email.value || "").trim();
+        var message = String(form.message.value || "").trim();
+
+        if (!name || !email || !message) {
+          msg.textContent = "Please fill in all fields.";
+          msg.style.color = "#f87171";
+          return;
+        }
+
+        try {
+          var response = await fetch("/api/contact", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name, email, message })
+          });
+          var data = await response.json();
+          if (!response.ok) {
+            msg.textContent = data.error || "Could not send message.";
+            msg.style.color = "#f87171";
+            return;
+          }
+          msg.textContent = "✓ Message sent successfully!";
+          msg.style.color = "#34d399";
+          form.reset();
+        } catch (error) {
+          msg.textContent = "Cannot connect to server. Is it running?";
+          msg.style.color = "#f87171";
+        }
+      });
+    })();
+  </script>
+  <script src="chat_widget.js"></script>
+</body>
+</html>

@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AI Security Chat — PhishGuard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── Chat-specific overrides ──────────────────────────── */
+    .chat-wrap { max-width: 960px; margin: 0 auto; padding: 0 24px 60px; }
+
+    .chat-card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(0,212,255,0.03);
+      position: relative; overflow: hidden;
+    }
+
+    .chat-card::before {
+      content: ''; position: absolute;
+      top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2), #10b981);
+    }
+
+    .chat-head {
+      display: flex; align-items: flex-start;
+      justify-content: space-between; gap: 14px; flex-wrap: wrap;
+      margin-bottom: 20px; padding-bottom: 18px;
+      border-bottom: 1px solid rgba(0,212,255,0.08);
+    }
+
+    .chat-head h1 {
+      margin: 0;
+      font-size: 20px;
+      font-family: 'Orbitron', monospace;
+      color: var(--accent);
+    }
+
+    .chat-head p { margin: 6px 0 0; color: var(--text-dim); font-size: 13px; }
+
+    .chat-log {
+      display: flex; flex-direction: column; gap: 12px;
+      max-height: 52vh; overflow: auto; padding-right: 6px;
+      margin-bottom: 16px;
+    }
+
+    .msg {
+      border-radius: 12px;
+      padding: 14px 16px;
+      font-size: 14px; line-height: 1.6;
+      animation: msgIn 0.25s ease;
+    }
+
+    @keyframes msgIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+
+    .msg.you {
+      background: rgba(0,212,255,0.06);
+      border: 1px solid rgba(0,212,255,0.18);
+      align-self: flex-end;
+      max-width: 85%;
+    }
+
+    .msg.ai {
+      background: rgba(124,58,237,0.06);
+      border: 1px solid rgba(124,58,237,0.18);
+      align-self: flex-start;
+      max-width: 88%;
+    }
+
+    .msg .meta {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 7px;
+    }
+
+    .msg.you .meta { color: var(--accent); }
+    .msg.ai .meta  { color: #a78bfa; }
+
+    .msg .text { white-space: pre-wrap; color: var(--text); }
+
+    .chat-form {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+    }
+
+    .chat-form textarea {
+      width: 100%;
+      min-height: 56px;
+      max-height: 160px;
+      resize: vertical;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid rgba(0,212,255,0.15);
+      background: rgba(0,212,255,0.03);
+      color: var(--text);
+      font: 14px/1.5 'Inter', sans-serif;
+      transition: all 0.2s;
+    }
+
+    .chat-form textarea:focus {
+      outline: none;
+      border-color: rgba(0,212,255,0.4);
+      box-shadow: 0 0 0 3px rgba(0,212,255,0.08);
+    }
+
+    .chat-note {
+      margin-top: 12px;
+      color: var(--text-dim);
+      font-size: 12px;
+      display: flex; align-items: center; gap: 6px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Navbar -->
+    <header>
+      <a class="brand" href="index.html" aria-label="Back to home">
+        <div class="logo" aria-hidden="true">⛨</div>
+        <div>
+          <div class="brand-name">PhishGuard</div>
+          <div class="brand-sub">Awareness Simulator</div>
+        </div>
+      </a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="choose_quiz.html">Simulator</a>
+        <a id="loginLink" href="login.html" class="btn secondary" style="padding:7px 16px;display:none">Log in</a>
+      </nav>
+    </header>
+  </div>
+
+  <div class="chat-wrap">
+    <section class="chat-card" aria-labelledby="chat-title">
+      <div class="chat-head">
+        <div>
+          <h1 id="chat-title">🤖 AI Security Assistant</h1>
+          <p>Ask about phishing red flags, suspicious links, safe practices, or anything cybersecurity-related.</p>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+          <span class="badge safe">✓ Powered by Gemini 2.0</span>
+          <a class="btn secondary" href="choose_quiz.html" style="text-decoration:none">← Back</a>
+        </div>
+      </div>
+
+      <div class="chat-log" id="chatLog" aria-live="polite" aria-label="Chat conversation"></div>
+
+      <form class="chat-form" id="chatForm" novalidate>
+        <textarea id="prompt" name="prompt" placeholder="Ask a question about phishing or online safety…" required></textarea>
+        <button class="btn primary" type="submit" id="sendBtn" style="align-self:flex-end;padding:14px 20px">Send →</button>
+      </form>
+
+      <div class="chat-note" id="note">
+        <span style="color:var(--accent3)">●</span>
+        <span>AI responses are for educational purposes only.</span>
+      </div>
+    </section>
+  </div>
+
+  <script src="auth.js"></script>
+  <script src="chat_widget.js"></script>
+  <script>
+    (function () {
+      var chatLog = document.getElementById('chatLog');
+      var form = document.getElementById('chatForm');
+      var promptEl = document.getElementById('prompt');
+      var sendBtn = document.getElementById('sendBtn');
+      var note = document.getElementById('note');
+      var loginLink = document.getElementById('loginLink');
+
+      function getSession() {
+        if (window.getCurrentSession) return window.getCurrentSession();
+        try { return JSON.parse(localStorage.getItem('pas_session') || 'null'); } catch (e) { return null; }
+      }
+
+      var session = getSession();
+      if (!session) {
+        loginLink.style.display = 'inline-flex';
+        note.innerHTML = '<span style="color:var(--accent3)">●</span> <span>Tip: <a href="login.html" style="color:var(--accent)">log in</a> to save your training progress. Chat works without an account.</span>';
+      } else {
+        note.innerHTML = '<span style="color:var(--accent3)">●</span> <span>Logged in as <strong style="color:var(--accent)">' + (session.name || session.email) + '</strong></span>';
+      }
+
+      function addMessage(role, text) {
+        var wrap = document.createElement('div');
+        wrap.className = 'msg ' + (role === 'you' ? 'you' : 'ai');
+
+        var meta = document.createElement('div');
+        meta.className = 'meta';
+        meta.textContent = role === 'you' ? '⬤ You' : '🤖 AI Assistant';
+
+        var body = document.createElement('div');
+        body.className = 'text';
+        body.textContent = text;
+
+        wrap.appendChild(meta);
+        wrap.appendChild(body);
+        chatLog.appendChild(wrap);
+        chatLog.scrollTop = chatLog.scrollHeight;
+      }
+
+      addMessage('ai', 'Hi! I\'m your cybersecurity assistant. Ask me anything about phishing emails, suspicious links, social engineering, or how to stay safe online.');
+
+      // Allow Shift+Enter for newlines, Enter to send
+      promptEl.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          form.dispatchEvent(new Event('submit'));
+        }
+      });
+
+      form.addEventListener('submit', async function (event) {
+        event.preventDefault();
+        var text = String(promptEl.value || '').trim();
+        if (!text) return;
+
+        addMessage('you', text);
+        promptEl.value = '';
+        sendBtn.disabled = true;
+        sendBtn.textContent = '...';
+
+        try {
+          var response = await fetch('/api/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: text })
+          });
+          var data = await response.json();
+          addMessage('ai', (!response.ok ? (data.error || 'Chat failed.') : (data.reply || '(no reply)')));
+        } catch (e) {
+          addMessage('ai', 'Cannot connect to server. Make sure localhost is running.');
+        } finally {
+          sendBtn.disabled = false;
+          sendBtn.textContent = 'Send →';
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
